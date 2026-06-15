@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caption AI — UMKMate AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">📒</span>
+        UMKMate AI
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Dasbor</a>
+        <a href="caption.html" class="active">Caption AI</a>
+        <a href="keuangan.html">Catatan Kas</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="analitik.html">Analitik</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="eyebrow">Modul 01</div>
+      <h1>Caption &amp; Deskripsi Produk</h1>
+      <p class="lede">
+        Isi detail produk kamu, AI akan menulis caption media sosial dan deskripsi
+        jualan yang siap pakai — dalam beberapa pilihan gaya bahasa.
+      </p>
+    </section>
+
+    <div class="two-col">
+      <div class="receipt">
+        <h3>Detail Produk</h3>
+
+        <label for="foto">Foto Produk (opsional)</label>
+        <input type="file" id="foto" accept="image/*">
+        <img id="preview" alt="Pratinjau foto produk" style="display:none; max-height:180px; border:1px solid var(--ink); border-radius:6px; margin:-4px 0 18px;">
+
+        <label for="nama">Nama Produk</label>
+        <input type="text" id="nama" placeholder="Contoh: Keripik Tempe Pedas Manis">
+
+        <div class="field-group">
+          <div>
+            <label for="harga">Harga</label>
+            <input type="text" id="harga" placeholder="Rp 15.000">
+          </div>
+          <div>
+            <label for="platform">Platform</label>
+            <select id="platform">
+              <option>Instagram</option>
+              <option>TikTok</option>
+              <option>WhatsApp / Status</option>
+              <option>Marketplace (Shopee/Tokopedia)</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="keunggulan">Keunggulan / Ciri Khas</label>
+        <textarea id="keunggulan" placeholder="Contoh: renyah tahan lama, tanpa pengawet, level pedas 1-5"></textarea>
+
+        <label for="tone">Gaya Bahasa</label>
+        <select id="tone">
+          <option value="santai">Santai &amp; akrab</option>
+          <option value="profesional">Profesional &amp; meyakinkan</option>
+          <option value="lucu">Lucu &amp; nyeleneh</option>
+          <option value="emosional">Menyentuh / storytelling</option>
+        </select>
+
+        <button id="btn-generate">Buatkan Caption</button>
+        <button class="secondary" id="btn-clear" type="button">Bersihkan</button>
+      </div>
+
+      <div>
+        <div class="receipt" id="output-card">
+          <h3>Hasil Caption</h3>
+          <div class="ai-stamp" style="margin-bottom:14px;">Dibuat AI</div>
+          <div id="output-text" style="font-size:0.95rem; white-space:pre-wrap;">
+            Hasil caption akan muncul di sini setelah kamu mengisi detail produk dan menekan
+            tombol "Buatkan Caption".
+          </div>
+          <button class="secondary" id="btn-copy" type="button" style="margin-top:16px; display:none;">Salin Teks</button>
+        </div>
+
+        <div class="receipt">
+          <h3>Caption AI Generatif (PartyRock)</h3>
+          <p class="hint" style="margin-top:0; margin-bottom:14px;">
+            Mode di samping adalah mode demo lokal (template, tanpa internet). Untuk hasil
+            caption yang lebih kaya &amp; natural — lengkap dengan versi Instagram, Facebook,
+            dan WhatsApp Business — gunakan aplikasi AI generatif berikut:
+          </p>
+          <a class="btn" href="https://partyrock.aws/u/Dimas27/sUQG-DaHZ/Pembuat-Caption-Produk-UMKM" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
+            Buka Pembuat Caption AI →
+          </a>
+          <p class="hint" style="margin-top:14px; margin-bottom:0;">
+            Akan terbuka di tab baru (PartyRock). Isi nama produk, harga, keunggulan, dan
+            gaya bahasa di sana untuk caption siap pakai.
+          </p>
+          <div class="ai-stamp" style="margin-top:14px;">Ditenagai Amazon Bedrock via PartyRock</div>
+        </div>
+
+        <div class="receipt">
+          <h3>Caption dari Foto + Terjemahan (PartyRock)</h3>
+          <p class="hint" style="margin-top:0; margin-bottom:14px;">
+            AI bisa menganalisis foto produk, membuat caption, dan menerjemahkannya ke bahasa lain — cocok untuk menjangkau pasar yang lebih luas.
+          </p>
+          <a class="btn" href="https://partyrock.aws/u/Dimas27/6TCrfP58L/new-app-6TCrfP58L" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
+            Buka Caption dari Foto →
+          </a>
+          <div class="ai-stamp" style="margin-top:14px;">Ditenagai Amazon Bedrock via PartyRock</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    UMKMate AI — Modul Caption AI · Bagian dari rangkaian asisten UMKM
+  </footer>
+
+  <script src="caption.js"></script>
+</body>
+</html>

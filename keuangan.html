@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Kas — UMKMate AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">📒</span>
+        UMKMate AI
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Dasbor</a>
+        <a href="caption.html">Caption AI</a>
+        <a href="keuangan.html" class="active">Catatan Kas</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="analitik.html">Analitik</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="eyebrow">Modul 02</div>
+      <h1>Catatan Kas Harian</h1>
+      <p class="lede">
+        Tulis transaksi dengan bahasa sehari-hari, AI akan memisahkan jenis (pemasukan/pengeluaran)
+        dan jumlahnya, lalu menyimpannya ke database.
+      </p>
+      <span class="badge" id="conn-status">Memeriksa koneksi database…</span>
+    </section>
+
+    <div class="two-col">
+      <div>
+        <div class="receipt">
+          <h3>Catat Transaksi Baru</h3>
+
+          <label for="catatan">Tulis transaksinya</label>
+          <input type="text" id="catatan" placeholder="Contoh: jual 5 keripik @15000 atau beli minyak goreng 50000">
+          <p class="hint" style="margin-top:-10px;">
+            Tips: sertakan kata "jual / terima / dapat" untuk pemasukan, atau "beli / bayar / keluar" untuk pengeluaran.
+          </p>
+
+          <div class="field-group">
+            <div>
+              <label for="jumlah">Jumlah (Rp)</label>
+              <input type="number" id="jumlah" placeholder="50000">
+            </div>
+            <div>
+              <label for="jenis">Jenis</label>
+              <select id="jenis">
+                <option value="masuk">Pemasukan</option>
+                <option value="keluar">Pengeluaran</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btn-parse" type="button" class="secondary">Deteksi Otomatis dari Teks</button>
+          <button id="btn-simpan" type="button">Simpan Transaksi</button>
+        </div>
+
+        <div class="receipt" id="ringkasan">
+          <h3>Ringkasan</h3>
+          <div class="receipt-row">
+            <span class="label">Total Pemasukan</span>
+            <span class="value" id="total-masuk">Rp 0</span>
+          </div>
+          <div class="receipt-row">
+            <span class="label">Total Pengeluaran</span>
+            <span class="value" id="total-keluar">Rp 0</span>
+          </div>
+          <div class="receipt-row total">
+            <span class="label">Saldo</span>
+            <span class="value" id="saldo">Rp 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="receipt">
+        <h3>Riwayat Transaksi</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Catatan</th>
+              <th style="text-align:right;">Jumlah</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-transaksi">
+            <tr><td colspan="3" style="color:var(--ink-soft);">Belum ada transaksi.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    UMKMate AI — Modul Catatan Kas · Tersambung ke PostgreSQL
+  </footer>
+
+  <script src="keuangan.js"></script>
+</body>
+</html>

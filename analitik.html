@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analitik — UMKMate AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">📒</span>
+        UMKMate AI
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Dasbor</a>
+        <a href="caption.html">Caption AI</a>
+        <a href="keuangan.html">Catatan Kas</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="analitik.html" class="active">Analitik</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="eyebrow">Modul 04</div>
+      <h1>Analitik &amp; Saran Stok</h1>
+      <p class="lede">
+        Ringkasan dari data transaksi kamu di Modul Catatan Kas, lengkap dengan
+        tren harian dan saran AI untuk stok produk.
+      </p>
+      <span class="badge" id="conn-status">Memeriksa koneksi…</span>
+    </section>
+
+    <div class="two-col">
+      <div class="receipt">
+        <h3>Tren Pemasukan vs Pengeluaran (14 Hari Terakhir)</h3>
+        <canvas id="chart-tren" height="220"></canvas>
+      </div>
+
+      <div class="receipt">
+        <h3>Ringkasan Total</h3>
+        <div class="receipt-row">
+          <span class="label">Total Pemasukan</span>
+          <span class="value" id="total-masuk">Rp 0</span>
+        </div>
+        <div class="receipt-row">
+          <span class="label">Total Pengeluaran</span>
+          <span class="value" id="total-keluar">Rp 0</span>
+        </div>
+        <div class="receipt-row total">
+          <span class="label">Saldo</span>
+          <span class="value" id="saldo">Rp 0</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="receipt">
+      <h3>Saran Stok dari AI</h3>
+      <div class="ai-stamp" style="margin-bottom:14px;">Dibuat AI</div>
+      <div id="saran-stok">
+        <p style="color:var(--ink-soft);">Memuat data produk…</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    UMKMate AI — Modul Analitik · Data diambil dari PostgreSQL
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="analitik.js"></script>
+</body>
+</html>

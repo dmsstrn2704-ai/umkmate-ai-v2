@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot — UMKMate AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">📒</span>
+        UMKMate AI
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Dasbor</a>
+        <a href="caption.html">Caption AI</a>
+        <a href="keuangan.html">Catatan Kas</a>
+        <a href="chatbot.html" class="active">Chatbot</a>
+        <a href="analitik.html">Analitik</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="eyebrow">Modul 03</div>
+      <h1>Chatbot untuk Pelanggan</h1>
+      <p class="lede">
+        Coba simulasikan chat pelanggan di sini. Bot akan menjawab pertanyaan umum
+        seperti jam buka, harga, dan pengiriman secara otomatis, 24 jam.
+      </p>
+      <span class="badge" id="conn-status">Memeriksa koneksi…</span>
+    </section>
+
+    <div class="two-col">
+      <div class="receipt">
+        <h3>Simulasi Chat Pelanggan</h3>
+        <div class="chat-window" id="chat-window">
+          <div class="bubble bot">
+            Halo! 👋 Selamat datang di toko kami. Ada yang bisa dibantu? Coba tanya soal
+            jam buka, harga, atau pengiriman.
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Tulis pesan seperti pelanggan...">
+          <button id="btn-kirim">Kirim</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="receipt">
+          <h3>Pertanyaan yang Dikenali</h3>
+          <p class="lede" style="font-size:0.9rem;">
+            Bot saat ini bisa menjawab kategori berikut secara otomatis:
+          </p>
+          <div class="receipt-row"><span class="label">Jam operasional</span><span class="value">"jam buka"</span></div>
+          <div class="receipt-row"><span class="label">Harga produk</span><span class="value">"harga / berapa"</span></div>
+          <div class="receipt-row"><span class="label">Pengiriman</span><span class="value">"ongkir / kirim"</span></div>
+          <div class="receipt-row"><span class="label">Sapaan</span><span class="value">"halo / hai"</span></div>
+        </div>
+
+        <div class="receipt">
+          <h3>Chatbot AI Generatif (PartyRock)</h3>
+          <p class="hint" style="margin-top:0; margin-bottom:14px;">
+            Simulasi di samping menjawab berdasarkan kata kunci sederhana (rule-based).
+            Untuk chatbot AI sungguhan yang bisa menjawab pertanyaan pelanggan secara
+            natural, gunakan aplikasi berikut:
+          </p>
+          <a class="btn" href="https://partyrock.aws/u/Dimas27/dn7WKLvMH/new-app-dn7WKLvMH" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
+            Buka Chatbot Customer Service →
+          </a>
+          <p class="hint" style="margin-top:14px; margin-bottom:0;">
+            Akan terbuka di tab baru (PartyRock). Coba tanyakan jam operasional, harga,
+            cara pesan, pembayaran, atau pengiriman.
+          </p>
+          <div class="ai-stamp" style="margin-top:14px;">Ditenagai Amazon Bedrock via PartyRock</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    UMKMate AI — Modul Chatbot · Riwayat tersimpan ke tabel chat_log
+  </footer>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
