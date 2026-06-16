@@ -13,11 +13,17 @@ app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'umkmate_db',
-  user: process.env.DB_USER || 'postgres',
+  host:     process.env.DB_HOST     || 'localhost',
+  port:     process.env.DB_PORT     || 5432,
+  database: process.env.DB_NAME     || 'umkmate_db',
+  user:     process.env.DB_USER     || 'postgres',
   password: process.env.DB_PASSWORD || ''
+});
+
+// ── Paksa timezone WIB (Asia/Jakarta = UTC+7) untuk setiap koneksi baru ──────
+// pg memanggil ini sekali per koneksi sebelum query pertama dijalankan.
+pool.on('connect', (client) => {
+  client.query("SET timezone = 'Asia/Jakarta'");
 });
 
 // --- Health check ---
@@ -36,8 +42,13 @@ app.get('/api/health', async (req, res) => {
 
 app.get('/api/transaksi', async (req, res) => {
   try {
+    // Kembalikan tanggal dalam WIB agar tampilan di frontend sudah benar
     const result = await pool.query(
-      'SELECT id, catatan, jumlah, jenis, tanggal FROM transaksi ORDER BY tanggal DESC LIMIT 200'
+      `SELECT id, catatan, jumlah, jenis,
+              (tanggal AT TIME ZONE 'Asia/Jakarta') AS tanggal
+       FROM transaksi
+       ORDER BY tanggal DESC
+       LIMIT 200`
     );
     res.json(result.rows);
   } catch (err) {
@@ -53,10 +64,16 @@ app.post('/api/transaksi', async (req, res) => {
   }
 
   try {
+    // Jika client mengirim tanggal (ISO string UTC dari JS), konversi ke WIB.
+    // Jika tidak dikirim, gunakan NOW() AT TIME ZONE 'Asia/Jakarta' agar
+    // waktu server selalu tersimpan sebagai WIB — bukan UTC.
     const result = await pool.query(
       `INSERT INTO transaksi (catatan, jumlah, jenis, tanggal)
-       VALUES ($1, $2, $3, COALESCE($4, NOW()))
-       RETURNING id, catatan, jumlah, jenis, tanggal`,
+       VALUES ($1, $2, $3,
+         COALESCE($4::timestamptz, NOW() AT TIME ZONE 'Asia/Jakarta')
+       )
+       RETURNING id, catatan, jumlah, jenis,
+         (tanggal AT TIME ZONE 'Asia/Jakarta') AS tanggal`,
       [catatan, jumlah, jenis, tanggal || null]
     );
     res.status(201).json(result.rows[0]);
@@ -120,10 +137,13 @@ app.get('/api/analitik/ringkasan', async (req, res) => {
     `);
 
     const harian = await pool.query(`
-      SELECT DATE(tanggal) AS tanggal, jenis, SUM(jumlah) AS total
+      SELECT
+        DATE(tanggal AT TIME ZONE 'Asia/Jakarta') AS tanggal,
+        jenis,
+        SUM(jumlah) AS total
       FROM transaksi
-      WHERE tanggal >= NOW() - INTERVAL '14 days'
-      GROUP BY DATE(tanggal), jenis
+      WHERE tanggal >= (NOW() AT TIME ZONE 'Asia/Jakarta') - INTERVAL '14 days'
+      GROUP BY DATE(tanggal AT TIME ZONE 'Asia/Jakarta'), jenis
       ORDER BY tanggal ASC
     `);
 

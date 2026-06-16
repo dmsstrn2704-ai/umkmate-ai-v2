@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="dicoding:email" content="dimasstr27@gmail.com">
   <title>UMKMate AI — Asisten AI untuk UMKM</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,67 +15,177 @@
         <span class="brand-mark">📒</span>
         UMKMate AI
       </a>
-      <nav class="main-nav">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
         <a href="index.html" class="active">Dasbor</a>
         <a href="caption.html">Caption AI</a>
-        <a href="keuangan.html">Catatan Kas</a>
+        <a href="keuangan.html">Kas &amp; Analitik</a>
         <a href="chatbot.html">Chatbot</a>
-        <a href="analitik.html">Analitik</a>
+        <a href="ekspor.html">Ekspor</a>
+        <a href="video.html">Foto &amp; Video AI</a>
+        <a href="branding.html">Branding</a>
+        <a href="negosiasi.html">Negosiasi</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="page-header">
-      <div class="eyebrow">Asisten AI untuk Usaha Kecil</div>
-      <h1>Satu kasir, satu marketer,<br>satu admin — jadi satu app.</h1>
-      <p class="lede">
-        UMKMate AI membantu pemilik usaha kecil menulis caption produk, mencatat kas,
-        menjawab chat pelanggan, dan membaca laporan penjualan — semuanya ditenagai AI,
-        ditulis dalam Bahasa Indonesia.
-      </p>
-      <div class="ai-stamp">Ditenagai AI · Data Tersimpan Real-time</div>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero">
+      <div class="hero-bg-orb orb-1"></div>
+      <div class="hero-bg-orb orb-2"></div>
+      <div class="hero-bg-orb orb-3"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow animate-fadein" style="--delay:0s">Asisten AI untuk Usaha Kecil</div>
+        <h1 class="hero-title animate-slideup" style="--delay:0.1s">
+          Satu kasir, satu marketer,<br>
+          <span class="hero-gradient-text">satu admin</span> — jadi satu app.
+        </h1>
+        <p class="lede animate-slideup" style="--delay:0.2s">
+          UMKMate AI membantu pemilik usaha kecil menulis caption produk, mencatat kas,
+          menjawab chat pelanggan, dan membaca laporan penjualan — semuanya ditenagai AI,
+          ditulis dalam Bahasa Indonesia.
+        </p>
+        <div class="hero-actions animate-slideup" style="--delay:0.3s">
+          <a href="caption.html" class="btn btn-primary">Mulai Gratis</a>
+          <a href="#modules" class="btn btn-outline">Lihat Fitur</a>
+        </div>
+        <div class="ai-stamp animate-fadein" style="--delay:0.45s">Ditenagai AI · Data Tersimpan Real-time</div>
+      </div>
+
+      <!-- Floating card deco -->
+      <div class="hero-deco animate-floatcard" style="--delay:0.5s">
+        <div class="deco-card">
+          <span class="deco-icon">🖼️</span>
+          <span>Caption AI</span>
+          <span class="deco-badge">Baru</span>
+        </div>
+        <div class="deco-card">
+          <span class="deco-icon">🧾</span>
+          <span>Catatan Kas</span>
+          <span class="deco-badge deco-badge--green">Live</span>
+        </div>
+        <div class="deco-card">
+          <span class="deco-icon">📊</span>
+          <span>Analitik</span>
+          <span class="deco-badge deco-badge--gold">Pro</span>
+        </div>
+      </div>
     </section>
 
-    <section class="module-grid">
-      <a href="caption.html" class="module-card">
-        <span class="num">Modul 01</span>
-        <span class="icon">🖼️</span>
-        <h3>Caption AI</h3>
-        <p>Tulis deskripsi produk &amp; caption media sosial otomatis dari foto atau detail produk.</p>
-        <span class="go">Buka modul →</span>
-      </a>
+    <!-- ============ STATS COUNTER ============ -->
+    <section class="stats-section animate-slideup" style="--delay:0.4s">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" data-target="64" data-suffix="JT+">0</span>
+          <span class="stat-label">Pelaku UMKM di Indonesia</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="60" data-suffix="%">0</span>
+          <span class="stat-label">Kontribusi terhadap PDB Nasional</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="4" data-suffix=" Modul">0</span>
+          <span class="stat-label">Fitur AI Terintegrasi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="24" data-suffix="/7">0</span>
+          <span class="stat-label">Chatbot Siap Melayani</span>
+        </div>
+      </div>
+    </section>
 
-      <a href="keuangan.html" class="module-card">
-        <span class="num">Modul 02</span>
-        <span class="icon">🧾</span>
-        <h3>Catatan Kas</h3>
-        <p>Catat pemasukan &amp; pengeluaran dengan bahasa sehari-hari, tersimpan otomatis ke database.</p>
-        <span class="go">Buka modul →</span>
-      </a>
+    <!-- ============ MODULE CARDS ============ -->
+    <section id="modules" class="modules-section">
+      <div class="section-header animate-fadein" style="--delay:0s">
+        <div class="eyebrow">Fitur Unggulan</div>
+        <h2>Semua yang kamu butuhkan,<br>dalam satu dashboard.</h2>
+      </div>
 
-      <a href="chatbot.html" class="module-card">
-        <span class="num">Modul 03</span>
-        <span class="icon">💬</span>
-        <h3>Chatbot Pelanggan</h3>
-        <p>Jawab pertanyaan pelanggan tentang produk, harga, dan jam buka secara otomatis 24 jam.</p>
-        <span class="go">Buka modul →</span>
-      </a>
+      <div class="module-grid">
+        <a href="caption.html" class="module-card animate-slideup" style="--delay:0.05s">
+          <div class="module-card-top">
+            <span class="num">Modul 01</span>
+            <span class="module-icon-wrap" style="--icon-color:#d9a23b20; --icon-border:#d9a23b40">🖼️</span>
+          </div>
+          <h3>Caption AI</h3>
+          <p>Tulis caption media sosial &amp; deskripsi produk otomatis dari foto atau detail produk.</p>
+          <span class="go">Buka modul →</span>
+        </a>
 
-      <a href="analitik.html" class="module-card">
-        <span class="num">Modul 04</span>
-        <span class="icon">📊</span>
-        <h3>Analitik &amp; Saran</h3>
-        <p>Ringkasan penjualan harian, tren kas, dan saran stok berbasis data transaksi kamu.</p>
-        <span class="go">Buka modul →</span>
-      </a>
+        <a href="keuangan.html" class="module-card animate-slideup" style="--delay:0.1s">
+          <div class="module-card-top">
+            <span class="num">Modul 02 &amp; 04</span>
+            <span class="module-icon-wrap" style="--icon-color:#2f6f6320; --icon-border:#2f6f6340">🧾</span>
+          </div>
+          <h3>Kas &amp; Analitik</h3>
+          <p>Catat transaksi harian dan lihat grafik tren keuangan — semua dalam satu halaman.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+
+        <a href="chatbot.html" class="module-card animate-slideup" style="--delay:0.15s">
+          <div class="module-card-top">
+            <span class="num">Modul 03</span>
+            <span class="module-icon-wrap" style="--icon-color:#4f6ef220; --icon-border:#4f6ef240">💬</span>
+          </div>
+          <h3>Chatbot Pelanggan</h3>
+          <p>Jawab pertanyaan pelanggan tentang produk, harga, dan jam buka secara otomatis 24 jam.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+
+        <a href="ekspor.html" class="module-card animate-slideup" style="--delay:0.2s">
+          <div class="module-card-top">
+            <span class="num">Modul 05</span>
+            <span class="module-icon-wrap" style="--icon-color:#2f6f6320; --icon-border:#2f6f6340">🌐</span>
+          </div>
+          <h3>Ekspor Multi-bahasa</h3>
+          <p>Generate deskripsi produk dalam 5 bahasa untuk menjangkau pasar internasional.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+
+        <a href="video.html" class="module-card animate-slideup" style="--delay:0.25s">
+          <div class="module-card-top">
+            <span class="num">Modul 06</span>
+            <span class="module-icon-wrap" style="--icon-color:#4f6ef220; --icon-border:#4f6ef240">🎬</span>
+          </div>
+          <h3>Foto &amp; Video AI</h3>
+          <p>Generate prompt foto &amp; video produk profesional untuk Kling AI, Midjourney, dan tools lainnya.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+
+        <a href="branding.html" class="module-card animate-slideup" style="--delay:0.3s">
+          <div class="module-card-top">
+            <span class="num">Modul 07</span>
+            <span class="module-icon-wrap" style="--icon-color:#d9a23b20; --icon-border:#d9a23b40">✨</span>
+          </div>
+          <h3>Branding</h3>
+          <p>Generate nama produk yang unik, slogan kuat, dan identitas brand siap pakai.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+
+        <a href="negosiasi.html" class="module-card animate-slideup" style="--delay:0.35s">
+          <div class="module-card-top">
+            <span class="num">Modul 08</span>
+            <span class="module-icon-wrap" style="--icon-color:#b8453a20; --icon-border:#b8453a40">🤝</span>
+          </div>
+          <h3>Negosiasi Harga</h3>
+          <p>Strategi &amp; skrip negosiasi dengan pembeli eceran, reseller, dan buyer grosir.</p>
+          <span class="go">Buka modul →</span>
+        </a>
+      </div>
     </section>
 
     <hr class="divider">
 
-    <section class="two-col">
-      <div>
-        <h2>Mengapa UMKMate AI?</h2>
+    <!-- ============ WHY SECTION ============ -->
+    <section class="two-col why-section">
+      <div class="animate-slideup" style="--delay:0s">
+        <div class="eyebrow">Mengapa UMKMate AI?</div>
+        <h2>Teknologi AI untuk semua pelaku UMKM.</h2>
         <p class="lede">
           Indonesia punya lebih dari 64 juta pelaku UMKM yang menyumbang sekitar 60% PDB nasional,
           tapi kebanyakan masih mencatat keuangan manual dan menulis promosi sendiri tanpa bantuan AI.
@@ -82,9 +193,10 @@
           dalam satu tempat, tanpa perlu jadi ahli teknologi.
         </p>
       </div>
-      <div class="receipt">
+      <div class="receipt animate-fadein" style="--delay:0.15s">
+        <div class="receipt-header">Stack Teknologi</div>
         <div class="receipt-row">
-          <span class="label">Stack Teknologi</span>
+          <span class="label">Framework</span>
           <span class="value">PartyRock + Kiro</span>
         </div>
         <div class="receipt-row">
@@ -101,15 +213,93 @@
         </div>
         <div class="receipt-row total">
           <span class="label">Status</span>
-          <span class="value">MVP — Hackathon Build</span>
+          <span class="value">✅ MVP — Hackathon Build</span>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
-    UMKMate AI — Dibuat untuk membantu UMKM Indonesia naik kelas dengan AI.
+    <div class="footer-inner">
+      <span class="brand">
+        <span class="brand-mark">📒</span>
+        UMKMate AI
+      </span>
+      <span>Dibuat untuk membantu UMKM Indonesia naik kelas dengan AI.</span>
+      <span class="footer-year">© 2025</span>
+    </div>
   </footer>
+
+  <script>
+    // Hamburger nav toggle
+    (function() {
+      var btn = document.getElementById('nav-toggle');
+      var nav = document.getElementById('main-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function() {
+        var open = nav.classList.toggle('is-open');
+        btn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+      nav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // ── Animate on scroll (IntersectionObserver) ──────────────────────────
+    const animatedEls = document.querySelectorAll('.animate-slideup, .animate-fadein, .animate-floatcard');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    animatedEls.forEach(el => observer.observe(el));
+
+    // ── Counter animation ─────────────────────────────────────────────────
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const step = 16;
+      const increment = target / (duration / step);
+      let current = 0;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = Math.floor(current) + suffix;
+      }, step);
+    }
+
+    const statsSection = document.querySelector('.stats-section');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.stat-number').forEach(animateCounter);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    if (statsSection) statsObserver.observe(statsSection);
+  </script>
 
 </body>
 </html>

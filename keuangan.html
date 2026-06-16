@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catatan Kas — UMKMate AI</title>
+  <title>Kas &amp; Analitik — UMKMate AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,36 +14,67 @@
         <span class="brand-mark">📒</span>
         UMKMate AI
       </a>
-      <nav class="main-nav">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
         <a href="index.html">Dasbor</a>
         <a href="caption.html">Caption AI</a>
-        <a href="keuangan.html" class="active">Catatan Kas</a>
+        <a href="keuangan.html" class="active">Kas &amp; Analitik</a>
         <a href="chatbot.html">Chatbot</a>
-        <a href="analitik.html">Analitik</a>
+        <a href="ekspor.html">Ekspor</a>
+        <a href="video.html">Foto &amp; Video AI</a>
+        <a href="branding.html">Branding</a>
+        <a href="negosiasi.html">Negosiasi</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="page-header">
-      <div class="eyebrow">Modul 02</div>
-      <h1>Catatan Kas Harian</h1>
+
+    <section class="page-header animate-slideup" style="--delay:0s">
+      <div class="eyebrow">Modul 02 &amp; 04</div>
+      <h1>Catatan Kas <span class="hero-gradient-text">&amp; Analitik</span></h1>
       <p class="lede">
-        Tulis transaksi dengan bahasa sehari-hari, AI akan memisahkan jenis (pemasukan/pengeluaran)
-        dan jumlahnya, lalu menyimpannya ke database.
+        Catat transaksi harian dan lihat ringkasan keuangan sekaligus grafik tren —
+        semua dalam satu halaman, tersambung ke database secara real-time.
       </p>
       <span class="badge" id="conn-status">Memeriksa koneksi database…</span>
     </section>
 
-    <div class="two-col">
-      <div>
-        <div class="receipt">
-          <h3>Catat Transaksi Baru</h3>
+    <!-- KPI cards -->
+    <div class="kpi-grid animate-slideup" style="--delay:0.08s">
+      <div class="kpi-card kpi-in">
+        <span class="kpi-label">Total Pemasukan</span>
+        <span class="kpi-value" id="total-masuk">Rp 0</span>
+      </div>
+      <div class="kpi-card kpi-out">
+        <span class="kpi-label">Total Pengeluaran</span>
+        <span class="kpi-value" id="total-keluar">Rp 0</span>
+      </div>
+      <div class="kpi-card kpi-saldo">
+        <span class="kpi-label">Saldo Bersih</span>
+        <span class="kpi-value" id="saldo">Rp 0</span>
+      </div>
+    </div>
+
+    <!-- Catat + Riwayat -->
+    <div class="page-grid animate-slideup" style="--delay:0.12s">
+
+      <!-- Kolom kiri: form input -->
+      <div class="col-stack">
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🧾</span>
+            <h3>Catat Transaksi Baru</h3>
+          </div>
 
           <label for="catatan">Tulis transaksinya</label>
-          <input type="text" id="catatan" placeholder="Contoh: jual 5 keripik @15000 atau beli minyak goreng 50000">
-          <p class="hint" style="margin-top:-10px;">
-            Tips: sertakan kata "jual / terima / dapat" untuk pemasukan, atau "beli / bayar / keluar" untuk pengeluaran.
+          <input type="text" id="catatan"
+                 placeholder="Contoh: jual 5 keripik @15000 atau beli minyak goreng 50000">
+          <p class="hint">
+            Tips: gunakan kata "jual / terima / dapat" untuk pemasukan, atau "beli / bayar / keluar" untuk pengeluaran.
           </p>
 
           <div class="field-group">
@@ -60,49 +91,109 @@
             </div>
           </div>
 
-          <button id="btn-parse" type="button" class="secondary">Deteksi Otomatis dari Teks</button>
-          <button id="btn-simpan" type="button">Simpan Transaksi</button>
+          <div class="btn-row">
+            <button id="btn-parse" type="button" class="secondary">Deteksi Otomatis</button>
+            <button id="btn-simpan" type="button">Simpan Transaksi</button>
+          </div>
         </div>
 
-        <div class="receipt" id="ringkasan">
-          <h3>Ringkasan</h3>
-          <div class="receipt-row">
-            <span class="label">Total Pemasukan</span>
-            <span class="value" id="total-masuk">Rp 0</span>
+        <!-- Saran stok AI -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🧠</span>
+            <h3>Saran Stok dari AI</h3>
+            <div class="ai-stamp" style="margin-left:auto;">Dibuat AI</div>
           </div>
-          <div class="receipt-row">
-            <span class="label">Total Pengeluaran</span>
-            <span class="value" id="total-keluar">Rp 0</span>
+          <div id="saran-stok" class="output-text">
+            <p style="color:var(--ink-soft); margin:0;">Memuat data produk…</p>
           </div>
-          <div class="receipt-row total">
-            <span class="label">Saldo</span>
-            <span class="value" id="saldo">Rp 0</span>
-          </div>
+        </div>
+
+      </div>
+
+      <!-- Kolom kanan: riwayat transaksi -->
+      <div class="card card--full-height">
+        <div class="card-header">
+          <span class="card-icon">📋</span>
+          <h3>Riwayat Transaksi</h3>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Catatan</th>
+                <th style="text-align:right;">Jumlah</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-transaksi">
+              <tr>
+                <td colspan="3" class="table-empty">Belum ada transaksi.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="receipt">
-        <h3>Riwayat Transaksi</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>Catatan</th>
-              <th style="text-align:right;">Jumlah</th>
-            </tr>
-          </thead>
-          <tbody id="tabel-transaksi">
-            <tr><td colspan="3" style="color:var(--ink-soft);">Belum ada transaksi.</td></tr>
-          </tbody>
-        </table>
+    </div>
+
+    <!-- Grafik tren -->
+    <div class="card animate-slideup" style="--delay:0.18s; margin-bottom:24px;">
+      <div class="card-header">
+        <span class="card-icon">📈</span>
+        <h3>Tren Pemasukan vs Pengeluaran <span class="label-optional">(14 Hari Terakhir)</span></h3>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="chart-tren" height="220"></canvas>
       </div>
     </div>
+
   </main>
 
   <footer class="site-footer">
-    UMKMate AI — Modul Catatan Kas · Tersambung ke PostgreSQL
+    <div class="footer-inner">
+      <span class="brand"><span class="brand-mark">📒</span> UMKMate AI</span>
+      <span>Modul Kas &amp; Analitik · Tersambung ke PostgreSQL</span>
+      <span class="footer-year">© 2025</span>
+    </div>
   </footer>
 
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-toggle');
+      var nav = document.getElementById('main-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function() {
+        var open = nav.classList.toggle('is-open');
+        btn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+      nav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          nav.classList.remove('is-open'); btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('is-open'); btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="keuangan.js"></script>
+  <script>
+    document.querySelectorAll('.animate-slideup').forEach(function(el) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08 });
+      io.observe(el);
+    });
+  </script>
 </body>
 </html>

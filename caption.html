@@ -14,18 +14,25 @@
         <span class="brand-mark">📒</span>
         UMKMate AI
       </a>
-      <nav class="main-nav">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
         <a href="index.html">Dasbor</a>
         <a href="caption.html" class="active">Caption AI</a>
-        <a href="keuangan.html">Catatan Kas</a>
+        <a href="keuangan.html">Kas &amp; Analitik</a>
         <a href="chatbot.html">Chatbot</a>
-        <a href="analitik.html">Analitik</a>
+        <a href="ekspor.html">Ekspor</a>
+        <a href="video.html">Foto &amp; Video AI</a>
+        <a href="branding.html">Branding</a>
+        <a href="negosiasi.html">Negosiasi</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="page-header">
+
+    <section class="page-header animate-slideup" style="--delay:0s">
       <div class="eyebrow">Modul 01</div>
       <h1>Caption &amp; Deskripsi Produk</h1>
       <p class="lede">
@@ -34,13 +41,23 @@
       </p>
     </section>
 
-    <div class="two-col">
-      <div class="receipt">
-        <h3>Detail Produk</h3>
+    <div class="page-grid animate-slideup" style="--delay:0.1s">
 
-        <label for="foto">Foto Produk (opsional)</label>
-        <input type="file" id="foto" accept="image/*">
-        <img id="preview" alt="Pratinjau foto produk" style="display:none; max-height:180px; border:1px solid var(--ink); border-radius:6px; margin:-4px 0 18px;">
+      <!-- Kolom kiri: form input -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-icon">🖼️</span>
+          <h3>Detail Produk</h3>
+        </div>
+
+        <label for="foto">Foto Produk <span class="label-optional">(opsional)</span></label>
+        <div class="file-upload-area" id="upload-area">
+          <input type="file" id="foto" accept="image/*">
+          <span class="file-upload-label">Klik atau seret foto ke sini</span>
+        </div>
+        <img id="preview" alt="Pratinjau foto produk"
+             style="display:none; max-height:180px; border:1px solid var(--paper-line);
+                    border-radius:var(--radius); margin: 4px 0 18px; object-fit:cover; width:100%;">
 
         <label for="nama">Nama Produk</label>
         <input type="text" id="nama" placeholder="Contoh: Keripik Tempe Pedas Manis">
@@ -72,56 +89,171 @@
           <option value="emosional">Menyentuh / storytelling</option>
         </select>
 
-        <button id="btn-generate">Buatkan Caption</button>
-        <button class="secondary" id="btn-clear" type="button">Bersihkan</button>
+        <label>Terjemahan Output <span class="label-optional">(opsional, pilih satu)</span></label>
+        <div class="translation-radio-group">
+          <label class="translation-radio-item">
+            <input type="radio" name="translation" value="none" checked>
+            <span>Tidak perlu</span>
+          </label>
+          <label class="translation-radio-item">
+            <input type="radio" name="translation" value="en">
+            <span>🇬🇧 English</span>
+          </label>
+          <label class="translation-radio-item">
+            <input type="radio" name="translation" value="zh">
+            <span>🇨🇳 中文</span>
+          </label>
+          <label class="translation-radio-item">
+            <input type="radio" name="translation" value="ar">
+            <span>🇸🇦 العربية</span>
+          </label>
+          <label class="translation-radio-item">
+            <input type="radio" name="translation" value="ja">
+            <span>🇯🇵 日本語</span>
+          </label>
+        </div>
+
+        <div class="btn-row">
+          <button id="btn-generate">Buatkan Caption</button>
+          <button class="secondary" id="btn-clear" type="button">Bersihkan</button>
+        </div>
       </div>
 
-      <div>
-        <div class="receipt" id="output-card">
-          <h3>Hasil Caption</h3>
-          <div class="ai-stamp" style="margin-bottom:14px;">Dibuat AI</div>
-          <div id="output-text" style="font-size:0.95rem; white-space:pre-wrap;">
-            Hasil caption akan muncul di sini setelah kamu mengisi detail produk dan menekan
-            tombol "Buatkan Caption".
+      <!-- Kolom kanan: output + partyrock -->
+      <div class="col-stack">
+
+        <div class="card" id="output-card">
+          <div class="card-header">
+            <span class="card-icon">✨</span>
+            <h3>Hasil Caption</h3>
+            <span id="detected-type" class="badge" style="margin-left:auto; display:none;"></span>
+            <div class="ai-stamp" style="margin-left:8px;">Dibuat AI</div>
           </div>
-          <button class="secondary" id="btn-copy" type="button" style="margin-top:16px; display:none;">Salin Teks</button>
+
+          <!-- Placeholder state -->
+          <div id="output-placeholder" class="output-placeholder" style="padding:32px 0;">
+            <span class="output-placeholder-icon">✍️</span>
+            <p>Isi detail produk di sebelah kiri lalu klik <strong>Buatkan Caption</strong>.</p>
+          </div>
+
+          <!-- Per-platform output blocks (hidden until generated) -->
+          <div id="output-platforms" style="display:none;">
+
+            <div class="caption-platform-block" id="block-instagram">
+              <div class="caption-platform-header">
+                <span class="caption-platform-label">📸 Instagram</span>
+                <button class="btn-copy-lang secondary" data-target="text-instagram" type="button">Salin</button>
+              </div>
+              <pre class="output-lang-text" id="text-instagram"></pre>
+            </div>
+
+            <div class="caption-platform-block" id="block-facebook">
+              <div class="caption-platform-header">
+                <span class="caption-platform-label">📘 Facebook</span>
+                <button class="btn-copy-lang secondary" data-target="text-facebook" type="button">Salin</button>
+              </div>
+              <pre class="output-lang-text" id="text-facebook"></pre>
+            </div>
+
+            <div class="caption-platform-block" id="block-whatsapp">
+              <div class="caption-platform-header">
+                <span class="caption-platform-label">💬 WhatsApp</span>
+                <button class="btn-copy-lang secondary" data-target="text-whatsapp" type="button">Salin</button>
+              </div>
+              <pre class="output-lang-text" id="text-whatsapp"></pre>
+            </div>
+
+            <!-- Terjemahan (shown only when requested) -->
+            <div id="translation-section" style="display:none;">
+              <div class="caption-translation-header">
+                <span id="translation-lang-label">🌐 Terjemahan</span>
+                <button class="btn-copy-lang secondary" data-target="text-translation" type="button">Salin</button>
+              </div>
+              <pre class="output-lang-text" id="text-translation"></pre>
+            </div>
+
+            <!-- Hashtags -->
+            <div class="caption-platform-block" id="block-hashtags">
+              <div class="caption-platform-header">
+                <span class="caption-platform-label"># Hashtag Otomatis</span>
+                <button class="btn-copy-lang secondary" data-target="text-hashtags" type="button">Salin</button>
+              </div>
+              <pre class="output-lang-text" id="text-hashtags" style="font-family:var(--font-mono); font-size:0.82rem; color:var(--stamp-teal);"></pre>
+            </div>
+
+          </div>
         </div>
 
-        <div class="receipt">
-          <h3>Caption AI Generatif (PartyRock)</h3>
-          <p class="hint" style="margin-top:0; margin-bottom:14px;">
-            Mode di samping adalah mode demo lokal (template, tanpa internet). Untuk hasil
-            caption yang lebih kaya &amp; natural — lengkap dengan versi Instagram, Facebook,
-            dan WhatsApp Business — gunakan aplikasi AI generatif berikut:
+        <div class="card partyrock-card">
+          <div class="card-header">
+            <span class="card-icon">📸</span>
+            <h3>Caption dari Foto + Terjemahan</h3>
+            <span class="badge" style="margin-left:auto;">PartyRock</span>
+          </div>
+          <p class="hint" style="margin:0 0 14px;">
+            AI bisa menganalisis foto produk, membuat caption, dan menerjemahkannya ke bahasa
+            lain — cocok untuk menjangkau pasar yang lebih luas.
           </p>
-          <a class="btn" href="https://partyrock.aws/u/Dimas27/sUQG-DaHZ/Pembuat-Caption-Produk-UMKM" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
-            Buka Pembuat Caption AI →
-          </a>
-          <p class="hint" style="margin-top:14px; margin-bottom:0;">
-            Akan terbuka di tab baru (PartyRock). Isi nama produk, harga, keunggulan, dan
-            gaya bahasa di sana untuk caption siap pakai.
-          </p>
-          <div class="ai-stamp" style="margin-top:14px;">Ditenagai Amazon Bedrock via PartyRock</div>
-        </div>
-
-        <div class="receipt">
-          <h3>Caption dari Foto + Terjemahan (PartyRock)</h3>
-          <p class="hint" style="margin-top:0; margin-bottom:14px;">
-            AI bisa menganalisis foto produk, membuat caption, dan menerjemahkannya ke bahasa lain — cocok untuk menjangkau pasar yang lebih luas.
-          </p>
-          <a class="btn" href="https://partyrock.aws/u/Dimas27/6TCrfP58L/new-app-6TCrfP58L" target="_blank" rel="noopener" style="display:inline-block; text-decoration:none;">
+          <a class="btn btn-primary btn-full"
+             href="https://partyrock.aws/u/Dimas27/6TCrfP58L/new-app-6TCrfP58L"
+             target="_blank" rel="noopener">
             Buka Caption dari Foto →
           </a>
           <div class="ai-stamp" style="margin-top:14px;">Ditenagai Amazon Bedrock via PartyRock</div>
         </div>
+
       </div>
     </div>
+
   </main>
 
   <footer class="site-footer">
-    UMKMate AI — Modul Caption AI · Bagian dari rangkaian asisten UMKM
+    <div class="footer-inner">
+      <span class="brand"><span class="brand-mark">📒</span> UMKMate AI</span>
+      <span>Modul Caption AI · Bagian dari rangkaian asisten UMKM</span>
+      <span class="footer-year">© 2025</span>
+    </div>
   </footer>
 
+  <script>
+    // Hamburger nav toggle
+    (function() {
+      var btn = document.getElementById('nav-toggle');
+      var nav = document.getElementById('main-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function() {
+        var open = nav.classList.toggle('is-open');
+        btn.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open);
+      });
+      // Close on nav link click (SPA-style feel)
+      nav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+      // Close on outside click
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('is-open');
+          btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+
   <script src="caption.js"></script>
+  <script>
+    // Page entrance animation
+    document.querySelectorAll('.animate-slideup').forEach(el => {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      io.observe(el);
+    });
+  </script>
 </body>
 </html>

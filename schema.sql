@@ -4,13 +4,18 @@
 -- pada database yang sudah kamu buat, misal: umkmate_db
 -- ============================================
 
+-- Paksa timezone WIB untuk sesi ini
+SET timezone = 'Asia/Jakarta';
+
 -- Tabel transaksi kas (Modul 02 — Catatan Kas, dipakai juga di Modul 04 — Analitik)
+-- Kolom tanggal pakai TIMESTAMPTZ agar PostgreSQL menyimpan info timezone,
+-- dan DEFAULT menggunakan WIB (UTC+7).
 CREATE TABLE IF NOT EXISTS transaksi (
   id SERIAL PRIMARY KEY,
   catatan TEXT NOT NULL,
   jumlah NUMERIC(14, 2) NOT NULL,
   jenis VARCHAR(10) NOT NULL CHECK (jenis IN ('masuk', 'keluar')),
-  tanggal TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  tanggal TIMESTAMPTZ NOT NULL DEFAULT (NOW() AT TIME ZONE 'Asia/Jakarta')
 );
 
 -- Tabel produk sederhana (dipakai untuk saran stok di Modul 04)
@@ -27,7 +32,7 @@ CREATE TABLE IF NOT EXISTS chat_log (
   id SERIAL PRIMARY KEY,
   pesan_user TEXT NOT NULL,
   pesan_bot TEXT NOT NULL,
-  dibuat_pada TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  dibuat_pada TIMESTAMPTZ NOT NULL DEFAULT (NOW() AT TIME ZONE 'Asia/Jakarta')
 );
 
 -- Contoh data awal (boleh dihapus)
